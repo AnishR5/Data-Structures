@@ -238,6 +238,55 @@ public class BinarySearchTree {
 		}
 		return new Node[] {null,null};
 	}
+	
+	
+	public void Delete(int key)
+	{
+		Node trav,parent;
+		Node[] arr=BinarySearchwithParent(key);
+		trav=arr[0];
+		parent=arr[1];
+		//if deletion node has both child
+		if(trav==null)
+			throw new RuntimeException("invalid node");
+		
+		if(trav.getLeft()!=null && trav.getRight()!=null)
+		{
+			parent=trav;
+			Node InSucc=trav.getRight();
+			//find In order successor
+			while(InSucc.getLeft()!=null)
+			{
+				parent=InSucc;
+				InSucc=InSucc.getLeft();
+			}
+			//Override data of node with inorder successor data
+			trav.setData(InSucc.getData());
+			//mark node for 
+			trav=InSucc;
+		}
+		//	if node has right child
+		if(trav.getLeft()==null)
+		{
+			if(trav==root)
+				root=trav.getRight();
+			if(trav==parent.getLeft())
+				parent.setLeft(trav.getRight());
+			else
+				parent.setRight(trav.getRight());
+		}	
+		else if(trav.getRight()==null)
+		{
+			if(trav== root)
+				root=trav.getLeft();
+			if(trav==parent.getLeft())
+				parent.setLeft(trav.getLeft());
+			else
+				parent.setRight(trav.getLeft());
+		}
+		
+		
+	}
 		
 
 }
