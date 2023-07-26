@@ -64,6 +64,7 @@ public class TestBST {
 		bst.Delete(50);
 		bst.inorder();
 		
+		
 	}
 
 }
